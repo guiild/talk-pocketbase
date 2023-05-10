@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Authenticator from "./Authenticator";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import AuthenticatorPopup from "./Auth/AuthenticatorPopup";
+import Redirect from "./Auth/Redirect";
+import Authenticator from "./Auth/Authenticator";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,10 @@ const router = createBrowserRouter([
         <App />
       </Authenticator>
     ),
+  },
+  {
+    path: "/redirect",
+    element: <Redirect />,
   },
 ]);
 
