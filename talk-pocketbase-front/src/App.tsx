@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import "./App.css";
 
 import PocketBase from "pocketbase";
 import { Collections, TodoRecord, TodoResponse } from "./pocketbase-types";
@@ -33,19 +32,13 @@ const App: FC = () => {
   useEffect(() => {
     getTodos();
     pb.collection(Collections.Todo).subscribe("*", function (e) {
-      if (
-        e.action === "create" &&
-        e.record.collectionName === Collections.Todo
-      ) {
+      if (e.action === "create") {
         setTodos((prev) => {
           const newList = [...prev];
           newList.push(e.record as TodoResponse);
           return newList;
         });
-      } else if (
-        e.action === "delete" &&
-        e.record.collectionName === Collections.Todo
-      ) {
+      } else if (e.action === "delete") {
         setTodos((prev) => {
           const index = prev.findIndex((td) => td.id === e.record.id);
           if (index >= 0) {
